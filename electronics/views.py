@@ -65,3 +65,11 @@ class ProductViewSet(viewsets.ModelViewSet):
             case _:
                 raise ValidationError("choise correct supplier")
         new_product.save()
+
+    def list(self, request, *args, **kwargs):
+        queryset = self.get_queryset()
+        output = []
+        serializer = self.get_serializer(queryset, many = True)
+        for product in serializer.data:
+            pass
+
