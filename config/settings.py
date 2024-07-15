@@ -42,11 +42,15 @@ INSTALLED_APPS = [
     "rest_framework",
     "electronics",
     "users",
+    "djoser",
+    "drf_yasg",
+    "redoc",
 ]
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
+    "corsheaders.middleware.CorsMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
@@ -108,13 +112,15 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
+DJOSER = {
+    "USER_ID_FIELD": "email",
+}
 # Internationalization
 # https://docs.djangoproject.com/en/5.0/topics/i18n/
 
 LANGUAGE_CODE = "en-us"
 
-TIME_ZONE = "UTC"
+TIME_ZONE = "europe/Moscow"
 
 USE_I18N = True
 
@@ -125,8 +131,16 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
 STATIC_URL = "static/"
-
+CORS_ALLOW_ALL_ORIGINS = True
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:8000",
+    "https://read-and-write.example.com",
+]
 
+CSRF_TRUSTED_ORIGINS = [
+    "https://read-and-write.example.com",
+]
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+AUTH_USER_MODEL = "users.user"
